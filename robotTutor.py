@@ -7,7 +7,6 @@ import serial
     
 root = Tk()
 
-
 #application title and instruction text
 title = ttk.Label(root, text = "RobotTutor.tech")
 title.config(font = ('Courier', 32, 'bold'), background = 'yellow')
@@ -35,7 +34,6 @@ valueInside = StringVar(root)
 print (optionsList)
 
 dropdownMenu = ttk.OptionMenu(root, valueInside, optionsList[0], *optionsList)
-
 dropdownMenu.pack()
 
 
