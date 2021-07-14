@@ -1,6 +1,6 @@
-
 from tkinter import *
 from tkinter import ttk
+import tkinter as tk
 import webbrowser
 from serial.tools import list_ports
 import serial
@@ -23,18 +23,19 @@ label1 = ttk.Label(root, text = "Select COM port")
 label1.config(font = ('Courier', 18 ,'bold'), foreground = 'blue')
 label1.pack(pady = 20)
 
-OPTIONS = serial.tools.list_ports.comports(include_links=False)
+allComPorts = serial.tools.list_ports.comports(include_links=False)
 
-comPorts = StringVar(root)
-cutOptions = []
+optionsList = []
 
-for comPorts in OPTIONS:
-    cutOptions.append(comPorts.device)
+for i in allComPorts:
+    optionsList.append(i.device)
 
-print (cutOptions)
-comPorts.set(cutOptions[0]) # default value displayed on the menu
+valueInside = StringVar(root)
 
-dropdownMenu = OptionMenu(root, comPorts, *cutOptions)
+print (optionsList)
+
+dropdownMenu = ttk.OptionMenu(root, valueInside, optionsList[0], *optionsList)
+
 dropdownMenu.pack()
 
 
@@ -43,17 +44,9 @@ button = ttk.Button(root, text = "Connect Robot")
 button.pack(pady = 20)
 
 def connectRobot():
-    port = comPorts.get()
+    port = valueInside.get()
 
     print (port)
-    
-    portLen = len(port)
-    shortPort = ""
-
-    for i in range(0, portLen-6):
-        shortPort = shortPort + port[i]
-
-    print (shortPort)
     
     ser = serial.Serial(port, 9600)
     data = "PlayNote 100,100\n"
