@@ -59,7 +59,7 @@ def connectRobot():
     data = "PlayNote 100,100\n"
     ser.write(data.encode())
     
-    webbrowser.open("http://robottutor.tech/")
+    webbrowser.open("https://robottutor.tech/")
 
 button.config(command = connectRobot)  
 
